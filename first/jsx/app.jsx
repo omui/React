@@ -8,9 +8,11 @@ var Hello = React.createClass({
 	},
 	render : function(){
 		return <div>
-				for(var i = 0; i <= this.state.messageIndex; i++){
-					<Message message={this.state.messages[i]} response={this.getResponseMessage()}/>
-				}				
+				{this.state.messages.map(function(msg, index){
+					if(index <= this.state.messageIndex){
+						return <Message message={msg} response={this.getResponseMessage()}/>
+					}
+				}, this)}				
 				<form onSubmit={this.submitMessage}>
 					<input type="text" placeholder="type here..." ref="response"/>
 				</form>
