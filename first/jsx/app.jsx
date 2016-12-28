@@ -1,48 +1,34 @@
-var Hello = React.createClass({
-	getInitialState : function() {
-		return { 
-			messages : ["Hello Hariom!", "how are you?", "how was your day?"],
-			messageIndex : 0,
-			responses : []			
-		};	
-	},
-	render : function(){
-		return <div>
-				{this.state.messages.map(function(msg, index){
-					if(index <= this.state.messageIndex){
-						return <Message message={msg} response={this.getResponseMessage()}/>
-					}
-				}, this)}				
-				<form onSubmit={this.submitMessage}>
-					<input type="text" placeholder="type here..." ref="response"/>
-				</form>
-			</div>;
-	},
-	getResponseMessage : function(){
-		//debugger;		
-		var responseMessage = "";
-		if(this.state.messageIndex > 0){
-			responseMessage = this.state.responses[this.state.messageIndex - 1];
+var messages = ["how are you?", "how was your day?"]
+
+var Chat = React.createClass({
+	getInitialState : function(){
+		return {
+			chat : ["Hello Hariom!"],
+			inputMsgVal : ""
 		}
-		return responseMessage;
 	},
-	submitMessage : function(e){
-		//debugger;
-		e.preventDefault();			
+	formSubmit : function(e){
+		e.preventDefault();
 		this.setState({
-			responses : this.state.responses.concat([this.refs.response.value]),
-			messageIndex : this.state.messageIndex + 1
-		});		
-	}
-});
-
-var Message = React.createClass({
+				chat :  messages.length ? this.state.chat.concat([this.refs.msg.value, messages.shift()]) : this.state.chat.concat([this.refs.msg.value]),
+				inputMsgVal : ""
+			});
+	},
+	inputChange : function(e){
+		this.setState({
+			inputMsgVal : e.target.value
+		});
+	},
 	render : function(){
-		return <div>
-			<em>{this.props.message}</em>
-			<p>{this.props.response}</p>
-		</div>
+		return (<div>
+			{this.state.chat.map(function(msg, index){
+				return <p key={index}>{msg}</p>
+			})}
+			<form onSubmit={this.formSubmit} ref="form">
+				<input type="text" placeholder="type here.." onChange={this.inputChange} value={this.state.inputMsgVal} ref="msg"/>
+			</form>
+		</div>);
 	}
 });
 
-ReactDOM.render(<Hello/>, document.getElementById("container"));
+ReactDOM.render(<Chat/>, document.getElementById("container"));
