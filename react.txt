@@ -15,3 +15,13 @@ pure function are the function who's return value depend on the solely values of
 pure function do not modify the value passed to them.
 
 To describe state mutation you have to write a pure function that takes the previous states of the app, the action is being dipsatched and returns next state of the app. this function is called reducers
+
+
+===============================
+New things to learn in ES6
+
+Destructuring assignment
+Arrow Function
+Object Literals
+
+===============================
