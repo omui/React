@@ -1,0 +1,17 @@
+everthing that changed in application including the data and UI state is contained in single state or object we call it state.
+
+the state is minimal representation of the data in your app, 
+
+state is read only
+
+the only way to change the state tree is by dispatching an action.
+
+an action is plain javascript object describing the change
+
+the action is mininal representation of the change to the data.
+
+pure function are the function who's return value depend on the solely values of the arguments.
+
+pure function do not modify the value passed to them.
+
+To describe state mutation you have to write a pure function that takes the previous states of the app, the action is being dipsatched and returns next state of the app. this function is called reducers
